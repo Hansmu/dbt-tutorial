@@ -189,3 +189,24 @@ To check for freshness, you can run the command:
 dbt source freshness
 ```
 
+### Snapshots
+
+Snapshots handle slowly changing dimensions.
+
+That is, they make sure that historic information is kept.
+
+The row will have a valid from and a valid to field appended to it.
+
+The active row is the one with the valid to field set to null.
+
+If a property is changed, then a new row is created with the new values and a valid to of null, while the old row is updated with a valid to of the current date.
+
+The snapshots live in the `snapshots` folder.
+
+There are two strategies that you can use for snapshot creation checks:
+1. A unique key and an updated_at field
+2. Checking any number of fields
+
+Snapshots create a new table in your DB.
+
+
