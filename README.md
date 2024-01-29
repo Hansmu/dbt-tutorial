@@ -174,4 +174,18 @@ When you run `dbt seed`, then the file will be uploaded to a table with the same
 
 DBT figures out the schema of the table by looking at the CSV file.
 
+### Sources
+
+The `sources.yml` file is used to document the raw data sources that you're using.
+
+You can specify aliases for the tables, along with a bunch of metadata.
+
+It also allows for the checking of freshness.
+You specify how long ago data should have been updated.
+
+To check for freshness, you can run the command:
+    
+```bash
+dbt source freshness
+```
 
