@@ -164,3 +164,14 @@ When compilation happens, the `ephermal` models are turned into `with` statement
 
 If you change a table to a view, then it automatically drops the table.
 
+### Seeds
+
+Seeds are local files that you upload to the data warehouse from DBT.
+
+When running `dbt seed`, it will look in the `seeds` folder for CSV files.
+
+When you run `dbt seed`, then the file will be uploaded to a table with the same name as the file.
+
+DBT figures out the schema of the table by looking at the CSV file.
+
+
