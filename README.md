@@ -92,3 +92,26 @@ The `macros` folder contains the SQL files that are used to create macros.
 The `analysis` folder contains the SQL files that are used to analyse the data.
 
 All of the above folders can be changed in the `dbt_project.yml` file.
+
+### Models
+
+Models are the SQL files that are used to transform the data.
+
+They are the basic building blocks of your business logic.
+
+Materialized as tables or views.
+
+Models can reference each other, use templates, and use macros.
+
+You'll usually see the SQL written in models using the `with` statement.
+
+You can add subfolders to the `models` folder to organise your models.
+
+By default, a model is a view.
+
+Use `dbt run` to run the entire pipeline.
+It will compile the models and run them against the target DB.
+
+If your schema does not exist in the database, then the `dbt run` command will create it.
+
+Remember, the schema was defined in the `dbt_project.yml` file.
