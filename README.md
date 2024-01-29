@@ -108,10 +108,59 @@ You'll usually see the SQL written in models using the `with` statement.
 You can add subfolders to the `models` folder to organise your models.
 
 By default, a model is a view.
+The default materialization can be changed in the `dbt_project.yml` file.
 
 Use `dbt run` to run the entire pipeline.
 It will compile the models and run them against the target DB.
 
+All models of type `table` will be re-created on every run.
+So if you've manually inserted into it, it will be gone after the run.
+
+`incremental` on the other hand will only update the rows that have added.
+If a row is removed from the base table or a row has been manually inserted into the table, it will not be removed.
+
 If your schema does not exist in the database, then the `dbt run` command will create it.
 
 Remember, the schema was defined in the `dbt_project.yml` file.
+
+There are four different kinds of materializations:
+* Table - creates a table in the database. Frequent access.
+* View - creates a view in the database. Infrequent access.
+* Incremental - creates a table in the database, and then updates it incrementally. 
+* Ephemeral - an intermediate step, doesn't create a table in the database.
+
+DBT uses Jinja for templating and macros.
+
+To refer to another model, you can use the `ref` function.
+
+```sql
+select * from {{ ref('model_name') }}
+```
+
+To override default settings, you can use the `config` function inside a model file.
+For example in the [fct_reviews.sql](dbtlearn/models/facts/fct_reviews.sql) file, we have the following:
+
+```sql
+{{
+    config(
+        materialized = 'incremental',
+        on_schema_change='fail'
+    )
+}}
+```
+
+If you want to re-create an incremental model, you can use the `--full-refresh` flag.
+
+```bash
+dbt run --full-refresh
+```
+
+If you change the type of materialization to `ephemeral`, then the model will not be dropped if it exists.
+You have to do it manually.
+
+When compilation happens, the `ephermal` models are turned into `with` statements in the compiled SQL file.
+
+**If you want to debug what DBT has created, then you can look in the `target` folder.**
+
+If you change a table to a view, then it automatically drops the table.
+

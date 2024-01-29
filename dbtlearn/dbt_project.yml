@@ -32,3 +32,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   dbtlearn:
+    # + means that it's a built-in property for DBT
+    +materialized: view # The default, but being explicit
+    # Specifying the dimensions folder
+    dimensions:
+      +materialized: table # Override the default for this folder
+    staging-layer:
+     +materialized: ephemeral
