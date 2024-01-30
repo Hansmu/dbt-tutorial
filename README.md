@@ -251,4 +251,9 @@ They are written in SQL.
 They live inside the `tests` folder.
 
 
+### Macros
+
+Macros are basically Jinja templates that are created in the `macros` folder.
+
+There are built-in macros in DBT.
 
