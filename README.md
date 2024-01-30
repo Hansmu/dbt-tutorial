@@ -240,7 +240,12 @@ The tests go to your datasource and execute the tests against the data in the ta
 
 The aim is to make sure that the data is correct.
 
-These live in the `schema.yml` folder.
+These live in a YAML file in the `models` folder.
+
+If they're simple definitions, you can have a single YAML file.
+You might name it `schema.yml`.
+
+However, if you have more complex definitions, then you can have multiple YAML files.
 
 #### Singular tests
 
@@ -261,6 +266,7 @@ There are built-in macros in DBT.
 Custom generic tests can be created using macros.
 They're nothing more than macros with a special signature.
 You can add them to your `schema.yml` file.
+Or to whichever YAML file you're using for your generic tests.
 They live inside the `macros` folder, because they're still macros.
 
 #### Third-party libraries
