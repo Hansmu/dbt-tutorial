@@ -210,3 +210,45 @@ There are two strategies that you can use for snapshot creation checks:
 Snapshots create a new table in your DB.
 
 
+### Tests
+
+There are two types of tests:
+1. Singular - SQL queries in tests that are expected to return 0 rows.
+2. Generic - check the values of a column.
+
+This isn't unit testing, but validating the data that already exists.
+
+You can run the tests using the command:
+
+```bash
+dbt test
+```
+
+To run only a specific test, you can use the command:
+
+```bash
+dbt test --select <test_name>
+```
+
+#### Generic tests
+
+They are built in tests in DBT.
+
+They can come from the core installation, 3rd party packages, or your own custom definitions.
+
+The tests go to your datasource and execute the tests against the data in the tables.
+
+The aim is to make sure that the data is correct.
+
+These live in the `schema.yml` folder.
+
+#### Singular tests
+
+These are custom tests that you write yourself.
+
+They are written in SQL.
+
+They live inside the `tests` folder.
+
+
+
