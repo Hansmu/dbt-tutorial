@@ -257,7 +257,20 @@ Macros are basically Jinja templates that are created in the `macros` folder.
 
 There are built-in macros in DBT.
 
+#### Custom generic tests
 Custom generic tests can be created using macros.
 They're nothing more than macros with a special signature.
 You can add them to your `schema.yml` file.
 They live inside the `macros` folder, because they're still macros.
+
+#### Third-party libraries
+
+Third party libraries can be found [here](https://hub.getdbt.com/).
+
+In order to manage your packages, you'll need a `packages.yml` file in the project root.
+
+To install the packages, you can run the command:
+
+```bash
+dbt deps
+```

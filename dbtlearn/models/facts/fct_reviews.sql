@@ -12,7 +12,10 @@ WITH src_reviews AS (
   SELECT * FROM {{ ref('staging_reviews') }}
 )
 
-SELECT *
+SELECT
+    -- Using a dependency to generate a new unique ID using the columns described
+    {{ dbt_utils.surrogate_key(['listing_id', 'review_date', 'reviewer_name', 'review_text']) }} AS review_id,
+    *
 FROM src_reviews
 WHERE review_text is not null
 -- Since it's incremental, it needs to know what defines a new record
