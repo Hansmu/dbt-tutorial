@@ -274,3 +274,73 @@ To install the packages, you can run the command:
 ```bash
 dbt deps
 ```
+
+### Documentation
+
+DBT can be used to generate documentation for your models.
+
+You can add assets like images and markdown to documentation.
+
+Documentation can be defined in two ways:
+1. In yaml files (like schema.yml)
+2. In standalone markdown files
+
+#### Compiling and serving the documentation
+
+DBT compiles the documentation down into an HTML file.
+
+To generate the documentation, you can run the command:
+
+```bash
+dbt docs generate
+```
+
+The output will be in the `target` folder.
+
+To view the documentation, you can run the command:
+
+```bash
+dbt docs serve
+```
+
+This will start a web server on port 8080.
+
+#### Adding descriptions to models
+
+You can go into the `schema.yml` file and add new `description` properties to the models.
+
+This can be either a simple string value or it can be a reference to markdown.
+
+To use markdown, you have to add a new markdown file into the `models` folder.
+The name doesn't matter, all that matters is that it's in the `models` folder and that it has the `.md` extension.
+
+If we want to change the overview page that opens when we serve the documentation, then we can add a new markdown file to the `models` folder.
+Or we could also re-use the existing file.
+What matters is the macro.
+
+To add assets to our markdown, we'll need a new folder and a reference to it in our `dbt_project.yml` file.
+If we want to name it `assets`, then the reference would look as such: `asset-paths: ["assets"]`.
+
+The assets, like everything else, ends up in the `target` folder.
+
+#### Lineage graph DAG
+
+The lineage graph is a DAG (Directed Acyclic Graph) that shows the dependencies between the models.
+
+Uses the references that we have set in the code and shows what is dependent on what.
+
+Can view it by opening the little Git looking icon on the bottom right.
+
+The bottom of the graph has some filters that can be applied.
+
+The `--select` bit uses the model name and a `+` to select the model and all of its dependencies.
+A preceding `+` will show all the preceding models for it. 
+And a trailing `+` will show all the models that depend on it.
+
+![Select filter for DAG](readme-images/selectFilter.png)
+
+And if you hit update graph at the bottom right, then you'd filter out everything that's grayed out.
+
+You can also use a dropdown menu by clicking on the elements and tell it to hide the selected elements.
+
+It updates the filter at the bottom based on the menu selections that you have made.

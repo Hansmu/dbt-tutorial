@@ -3,16 +3,19 @@ version: 2
 models:
   # We specify the table that we want to test
   - name:  dim_listings_cleansed
+    description: Cleansed table which contains AirBnB listings.
     columns:
       # We specify what tests we want to run on the column
       # In a regular SQL DB, these validations would exist on the model itself
       # However, in certain data lakes, we can't enforce these validations, ex Snowflake
       - name: listing_id
+        description: Primary key for the listing
         tests:
             - unique
             - not_null
 
       - name: host_id
+        description: ID of the host
         tests:
             - not_null
             # Checking that there is a valid relationship to another table
@@ -21,6 +24,7 @@ models:
                 field: host_id
 
       - name: room_type
+        description: Type of the apartment / room
         tests:
           # Checking that the values are within a list of accepted values
           - accepted_values:
@@ -32,5 +36,6 @@ models:
               ]
 
       - name: minimum_nights
+        description: '{{ doc("dim_listing_cleansed__minimum_nights") }}'
         tests:
           - positive_integer_value
