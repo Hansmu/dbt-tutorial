@@ -257,3 +257,7 @@ Macros are basically Jinja templates that are created in the `macros` folder.
 
 There are built-in macros in DBT.
 
+Custom generic tests can be created using macros.
+They're nothing more than macros with a special signature.
+You can add them to your `schema.yml` file.
+They live inside the `macros` folder, because they're still macros.
